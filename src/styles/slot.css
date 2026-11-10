@@ -1,0 +1,672 @@
+/* ============================================================
+   SLOT LAB — машина, барабаны, бонус Prize Parade, лог
+   ============================================================ */
+
+.slotlab-section {
+  background:
+    radial-gradient(800px 400px at 50% 10%, rgba(160, 107, 255, 0.12), transparent 65%);
+}
+
+.slotlab-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: var(--sp-5);
+  align-items: start;
+  margin-bottom: var(--sp-7);
+}
+
+@media (max-width: 980px) {
+  .slotlab-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Корпус машины ---------- */
+
+.machine {
+  border: 2px solid var(--line-strong);
+  border-radius: var(--r-xl);
+  background: linear-gradient(175deg, var(--bg-2), var(--bg-1) 60%, var(--bg-0));
+  box-shadow: var(--shadow-card), var(--glow-violet);
+  overflow: hidden;
+}
+
+.machine-marquee {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-5);
+  background: linear-gradient(90deg, rgba(240, 195, 78, 0.1), rgba(160, 107, 255, 0.12), rgba(240, 195, 78, 0.1));
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.machine-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: 0.28em;
+  font-size: 15px;
+  background: var(--gold-grad);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+.lamp {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: pulse-glow 1.8s ease-in-out infinite;
+}
+
+.machine-badge {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--turquoise);
+  border: 1px solid var(--turquoise);
+  border-radius: 999px;
+  padding: 3px 10px;
+  opacity: 0.9;
+}
+
+/* ---------- Бонусный HUD ---------- */
+
+.bonus-hud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-4);
+  align-items: center;
+  padding: var(--sp-2) var(--sp-5);
+  background: rgba(53, 224, 200, 0.07);
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.bh-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bh-item b {
+  color: var(--turquoise);
+}
+
+.bh-active {
+  color: var(--violet-soft);
+}
+
+.bh-active b {
+  color: var(--violet-soft);
+}
+
+.bh-win b {
+  color: var(--gold-bright);
+}
+
+.bh-pavilion {
+  margin-left: auto;
+  font-weight: 800;
+  color: var(--gold-bright);
+  font-size: 12.5px;
+}
+
+/* ---------- Экран поля ---------- */
+
+.machine-screen {
+  position: relative;
+  padding: var(--sp-5);
+  background:
+    radial-gradient(600px 220px at 50% 0%, rgba(91, 46, 158, 0.25), transparent 70%);
+}
+
+.reels-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--sp-2);
+  max-width: 760px;
+  margin-inline: auto;
+}
+
+.reel {
+  display: grid;
+  gap: var(--sp-2);
+}
+
+.reel-cell {
+  aspect-ratio: 1;
+  border-radius: var(--r-md);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter var(--t-fast), opacity var(--t-med), box-shadow var(--t-med), transform var(--t-fast);
+  overflow: hidden;
+}
+
+.cell-emoji {
+  font-size: clamp(24px, 4.2vw, 40px);
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.55));
+  user-select: none;
+}
+
+.reel-spinning .cell-blur {
+  filter: blur(2.5px);
+}
+
+.cell-win {
+  border-color: var(--gold-bright);
+  box-shadow: 0 0 18px rgba(240, 195, 78, 0.55), inset 0 0 12px rgba(240, 195, 78, 0.25);
+  animation: win-pop 0.5s var(--ease-out);
+}
+
+.cell-dim {
+  opacity: 0.4;
+}
+
+@keyframes win-pop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ---------- Линии выплат ---------- */
+
+.paylines {
+  position: absolute;
+  inset: var(--sp-5);
+  width: calc(100% - 2 * var(--sp-5));
+  height: calc(100% - 2 * var(--sp-5));
+  pointer-events: none;
+}
+
+.payline-line {
+  stroke-dasharray: 240;
+  stroke-dashoffset: 240;
+  animation: draw-line 0.7s var(--ease-out) forwards;
+  filter: drop-shadow(0 0 6px rgba(240, 195, 78, 0.8));
+}
+
+@keyframes draw-line {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ---------- Баннер выигрыша ---------- */
+
+.win-banner {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(26px, 4.5vw, 44px);
+  color: #241500;
+  background: var(--gold-grad);
+  background-size: 200% auto;
+  padding: 10px 30px;
+  border-radius: var(--r-lg);
+  box-shadow: 0 10px 44px rgba(240, 195, 78, 0.5);
+  animation: shimmer 2s linear infinite;
+  pointer-events: none;
+}
+
+/* ---------- HUD машины ---------- */
+
+.machine-hud {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-4) var(--sp-5);
+  border-top: 1px solid var(--line-strong);
+  flex-wrap: wrap;
+}
+
+.hud-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13.5px;
+  color: var(--text-2);
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  white-space: nowrap;
+}
+
+.hud-cell b {
+  color: var(--gold-bright);
+}
+
+.hud-cell svg {
+  color: var(--gold);
+}
+
+.spin-btn {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 13px 34px;
+  border: none;
+  border-radius: 999px;
+  background: var(--gold-grad);
+  background-size: 200% auto;
+  color: #241500;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 17px;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  box-shadow: var(--glow-gold);
+  transition: transform var(--t-fast), box-shadow var(--t-fast), opacity var(--t-fast);
+}
+
+.spin-btn:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 36px rgba(240, 195, 78, 0.5);
+  animation: shimmer 2s linear infinite;
+}
+
+.spin-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  filter: saturate(0.4);
+}
+
+.machine-status {
+  padding: var(--sp-3) var(--sp-5);
+  border-top: 1px dashed var(--line);
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-3);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 680px) {
+  .spin-btn {
+    margin-left: 0;
+    width: 100%;
+    justify-content: center;
+  }
+  .machine-hud {
+    justify-content: center;
+  }
+  .reels-grid {
+    gap: 6px;
+  }
+  .machine-screen {
+    padding: var(--sp-3);
+  }
+  .paylines {
+    inset: var(--sp-3);
+    width: calc(100% - 2 * var(--sp-3));
+    height: calc(100% - 2 * var(--sp-3));
+  }
+}
+
+/* ---------- Боковая панель: лог ---------- */
+
+.slotlab-side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.event-log {
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.event-log-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid var(--line);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--violet-soft);
+}
+
+.event-log-hint {
+  font-size: 11px;
+  color: var(--text-3);
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 600;
+}
+
+.event-list {
+  list-style: none;
+  padding: var(--sp-2);
+  margin: 0;
+  max-height: 420px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.event-item {
+  font-size: 12.5px;
+  padding: 8px 10px;
+  border-radius: var(--r-sm);
+  border-left: 3px solid var(--line-strong);
+  background: var(--bg-1);
+  color: var(--text-2);
+  line-height: 1.45;
+}
+
+.ev-info {
+  border-left-color: var(--violet);
+}
+
+.ev-win {
+  border-left-color: var(--gold);
+  color: var(--gold-bright);
+}
+
+.ev-bonus {
+  border-left-color: var(--turquoise);
+  color: var(--turquoise);
+}
+
+.ev-lose {
+  border-left-color: var(--bg-3);
+  color: var(--text-3);
+}
+
+.slotlab-hint {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: flex-start;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--r-md);
+  padding: var(--sp-3) var(--sp-4);
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.slotlab-hint svg {
+  color: var(--gold);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ---------- Легенда символов ---------- */
+
+.legend-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--violet-soft);
+  margin-bottom: var(--sp-4);
+}
+
+.legend-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--sp-3);
+}
+
+.legend-card {
+  display: flex;
+  gap: var(--sp-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  padding: var(--sp-4);
+  transition: border-color var(--t-fast);
+}
+
+.legend-card:hover {
+  border-color: var(--line-strong);
+}
+
+.legend-emoji {
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--line);
+}
+
+.legend-top {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}
+
+.legend-top b {
+  font-size: 14.5px;
+}
+
+.legend-pays {
+  font-size: 12px;
+  color: var(--gold);
+  font-weight: 800;
+  margin: 2px 0;
+  letter-spacing: 0.04em;
+}
+
+.legend-desc {
+  font-size: 12.5px;
+  color: var(--text-2);
+}
+
+/* ---------- Бонусный оверлей Prize Parade ---------- */
+
+.bonus-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  background: rgba(5, 2, 12, 0.88);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-5);
+  overflow-y: auto;
+}
+
+.bonus-panel {
+  position: relative;
+  width: min(880px, 100%);
+  border: 2px solid var(--line-gold);
+  border-radius: var(--r-xl);
+  background: linear-gradient(170deg, var(--bg-2), var(--bg-0));
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.7), var(--glow-gold);
+  padding: var(--sp-7) var(--sp-6);
+}
+
+.bonus-marquee {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-3);
+  color: var(--gold);
+}
+
+.bonus-marquee h3 {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 4vw, 36px);
+  letter-spacing: 0.18em;
+  background: var(--gold-grad);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+.bonus-sub {
+  text-align: center;
+  color: var(--text-2);
+  margin: var(--sp-3) auto var(--sp-5);
+  max-width: 560px;
+}
+
+.pavilion-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-4);
+}
+
+@media (max-width: 760px) {
+  .pavilion-grid {
+    grid-template-columns: 1fr;
+  }
+  .bonus-panel {
+    padding: var(--sp-6) var(--sp-4);
+  }
+}
+
+.pavilion {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2);
+  text-align: center;
+  padding: var(--sp-5) var(--sp-4);
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--r-lg);
+  background: var(--bg-1);
+  color: var(--text-1);
+  cursor: pointer;
+  transition: border-color var(--t-med), box-shadow var(--t-med), opacity var(--t-med);
+}
+
+.pavilion:hover {
+  border-color: var(--line-gold);
+}
+
+.pavilion-active {
+  border-color: var(--gold-bright);
+  box-shadow: var(--glow-gold);
+}
+
+.pavilion-dim {
+  opacity: 0.35;
+}
+
+.pavilion-emoji {
+  font-size: 44px;
+}
+
+.pavilion b {
+  font-size: 15.5px;
+}
+
+.pavilion-desc {
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.pavilion-effect {
+  margin-top: var(--sp-1);
+  font-size: 12px;
+  font-weight: 800;
+  border: 1px dashed;
+  border-radius: 999px;
+  padding: 5px 12px;
+}
+
+.pavilion-check {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--gold-grad);
+  color: #241500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--glow-gold);
+}
+
+.bonus-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--sp-5);
+  min-height: 52px;
+}
+
+/* Экран результата бонуса */
+
+.bonus-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
+  text-align: center;
+}
+
+.bonus-result-icon {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: var(--gold-grad);
+  color: #241500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--glow-gold);
+}
+
+.bonus-result h3 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  letter-spacing: 0.14em;
+}
+
+.bonus-result-win {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 7vw, 64px);
+  font-weight: 900;
+  background: var(--gold-grad);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 2.4s linear infinite;
+}
+
+/* ---------- Легенда ---------- */
+
+@media (max-width: 680px) {
+  .bonus-hud {
+    justify-content: center;
+  }
+  .bh-pavilion {
+    margin-left: 0;
+    width: 100%;
+    text-align: center;
+  }
+}
