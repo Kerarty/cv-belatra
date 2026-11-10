@@ -139,11 +139,13 @@ export function PlayerChip3D() {
       )
 
       // ---------- жетон ----------
-      const pivot = new THREE.Group()
+      // наклон на родителе, вращение — вокруг собственной оси жетона:
+      // лицо всегда к зрителю, «ЯК» читаем в любой фазе (как этикетка на пластинке)
+      const tilt = new THREE.Group()
+      tilt.rotation.x = 0.85
       const chip = new THREE.Group()
-      chip.rotation.x = 0.98 // наклон: лицевая грань к камере
-      pivot.add(chip)
-      scene.add(pivot)
+      tilt.add(chip)
+      scene.add(tilt)
 
       const bodyGeo = track(new THREE.CylinderGeometry(1, 1, 0.2, 64))
       const body = new THREE.Mesh(bodyGeo, [gold, faceMat, faceMatBack])
@@ -183,9 +185,6 @@ export function PlayerChip3D() {
       let dragging = false
       let lastX = 0
       let lastY = 0
-      // покачивание вместо полного вращения: инициалы всегда читаемы,
-      // полную раскрутку пользователь делает драгом
-      let dragOffsetY = 0
 
       const onDown = (e: PointerEvent) => {
         dragging = true
@@ -196,11 +195,11 @@ export function PlayerChip3D() {
       }
       const onMove = (e: PointerEvent) => {
         if (!dragging) return
-        dragOffsetY += (e.clientX - lastX) * 0.011
-        chip.rotation.x = THREE.MathUtils.clamp(
-          chip.rotation.x + (e.clientY - lastY) * 0.008,
-          0.55,
-          1.45,
+        chip.rotation.y += (e.clientX - lastX) * 0.011
+        tilt.rotation.x = THREE.MathUtils.clamp(
+          tilt.rotation.x + (e.clientY - lastY) * 0.006,
+          0.45,
+          1.25,
         )
         lastX = e.clientX
         lastY = e.clientY
@@ -219,9 +218,8 @@ export function PlayerChip3D() {
       let raf = 0
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
       const tick = () => {
-        // мягкое покачивание ±~28° вокруг драг-смещения
-        const sway = reduced || dragging ? 0 : Math.sin(performance.now() / 2000) * 0.3
-        pivot.rotation.y = dragOffsetY + sway
+        // медленное вращение в плоскости лица — «ЯК» читаем в любой фазе
+        if (!dragging && !reduced) chip.rotation.y += 0.0075
         renderer.render(scene, camera)
         raf = window.requestAnimationFrame(tick)
       }
