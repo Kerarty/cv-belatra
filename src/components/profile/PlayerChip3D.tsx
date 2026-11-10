@@ -24,7 +24,7 @@ export function PlayerChip3D() {
       // ---------- сцена ----------
       const scene = new THREE.Scene()
       const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 20)
-      camera.position.set(0, 0.55, 3.6)
+      camera.position.set(0, 0.55, 4.35)
       camera.lookAt(0, 0, 0)
 
       const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
@@ -151,14 +151,21 @@ export function PlayerChip3D() {
       const body = new THREE.Mesh(bodyGeo, [gold, faceMat, faceMatBack])
       chip.add(body)
 
-      // 12 костяных вкладок-насечек по кромке
-      const notchGeo = track(new THREE.BoxGeometry(0.12, 0.21, 0.17))
-      for (let i = 0; i < 12; i++) {
-        const a = (i / 12) * Math.PI * 2
-        const notch = new THREE.Mesh(notchGeo, ivory)
-        notch.position.set(Math.cos(a) * 0.97, 0, Math.sin(a) * 0.97)
-        notch.rotation.y = -a
-        chip.add(notch)
+      // 6 широких костяных спотов на кромке + инкрустация на лицевой грани —
+      // как у настоящей фишки
+      const spotGeo = track(new THREE.BoxGeometry(0.52, 0.2, 0.15))
+      const inlayGeo = track(new THREE.BoxGeometry(0.46, 0.012, 0.15))
+      for (let i = 0; i < 6; i++) {
+        const a = (i / 6) * Math.PI * 2
+        const spot = new THREE.Mesh(spotGeo, ivory)
+        spot.position.set(Math.cos(a) * 0.93, 0, Math.sin(a) * 0.93)
+        spot.rotation.y = -(a + Math.PI / 2)
+        chip.add(spot)
+
+        const inlay = new THREE.Mesh(inlayGeo, ivory)
+        inlay.position.set(Math.cos(a) * 0.86, 0.107, Math.sin(a) * 0.86)
+        inlay.rotation.y = -(a + Math.PI / 2)
+        chip.add(inlay)
       }
 
       // ---------- свет ----------
