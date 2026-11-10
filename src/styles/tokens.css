@@ -1,0 +1,73 @@
+/* ============================================================
+   GAME DESIGN STUDIO — Design Tokens (Premium Casino)
+   ============================================================ */
+
+:root {
+  /* --- Фон --- */
+  --bg-0: #0a0514;
+  --bg-1: #120a24;
+  --bg-2: #1a1032;
+  --bg-3: #241546;
+
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-strong: rgba(255, 255, 255, 0.08);
+  --surface-glass: rgba(26, 16, 50, 0.72);
+
+  /* --- Палитра --- */
+  --gold: #f0c34e;
+  --gold-bright: #ffdd7a;
+  --gold-deep: #9a6f1f;
+  --gold-grad: linear-gradient(135deg, #ffe9a8 0%, #f0c34e 45%, #c8952f 100%);
+
+  --violet: #a06bff;
+  --violet-soft: #c9b0ff;
+  --violet-deep: #5b2e9e;
+  --turquoise: #35e0c8;
+  --red-soft: #ff6b8d;
+
+  --text-1: #f5f0ff;
+  --text-2: #b3a8d4;
+  --text-3: #7d709f;
+
+  /* --- Линии и свечение --- */
+  --line: rgba(197, 160, 255, 0.16);
+  --line-strong: rgba(197, 160, 255, 0.32);
+  --line-gold: rgba(240, 195, 78, 0.38);
+
+  --glow-gold: 0 0 22px rgba(240, 195, 78, 0.28);
+  --glow-violet: 0 0 22px rgba(160, 107, 255, 0.35);
+  --glow-teal: 0 0 18px rgba(53, 224, 200, 0.3);
+  --shadow-card: 0 14px 40px rgba(5, 2, 12, 0.55);
+
+  /* --- Типографика --- */
+  --font-display: 'Cinzel', 'Georgia', serif;
+  --font-body: 'Manrope', system-ui, -apple-system, sans-serif;
+
+  /* --- Радиусы --- */
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+
+  /* --- Отступы --- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 72px;
+  --sp-9: 104px;
+
+  /* --- Слои --- */
+  --z-nav: 100;
+  --z-overlay: 200;
+  --z-toast: 300;
+
+  /* --- Анимации --- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --t-fast: 160ms;
+  --t-med: 320ms;
+  --t-slow: 600ms;
+}
