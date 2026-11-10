@@ -126,7 +126,13 @@ export function PlayerChip3D() {
       faceBottom.anisotropy = renderer.capabilities.getMaxAnisotropy()
 
       const gold = track(
-        new THREE.MeshStandardMaterial({ color: 0xb3861f, metalness: 0.5, roughness: 0.3 }),
+        new THREE.MeshPhysicalMaterial({
+          color: 0xb3861f,
+          metalness: 0.5,
+          roughness: 0.28,
+          clearcoat: 0.6,
+          clearcoatRoughness: 0.35,
+        }),
       )
       const ivory = track(
         new THREE.MeshStandardMaterial({ color: 0xf7f1df, metalness: 0.05, roughness: 0.55 }),
@@ -151,22 +157,27 @@ export function PlayerChip3D() {
       const body = new THREE.Mesh(bodyGeo, [gold, faceMat, faceMatBack])
       chip.add(body)
 
-      // 6 широких костяных спотов на кромке + инкрустация на лицевой грани —
-      // как у настоящей фишки
-      const spotGeo = track(new THREE.BoxGeometry(0.52, 0.2, 0.15))
-      const inlayGeo = track(new THREE.BoxGeometry(0.46, 0.012, 0.15))
-      for (let i = 0; i < 6; i++) {
-        const a = (i / 6) * Math.PI * 2
-        const spot = new THREE.Mesh(spotGeo, ivory)
-        spot.position.set(Math.cos(a) * 0.93, 0, Math.sin(a) * 0.93)
-        spot.rotation.y = -(a + Math.PI / 2)
-        chip.add(spot)
+      // 6 костяных спотов: сегмент кромки (пирог-сектор по окружности)
+      // и сектор на лицевой грани — всё заподлицо, без углов и наезжаний
+      const TAU = Math.PI * 2
+      const makeSpot = (a: number) => {
+        const wrap = new THREE.Group()
+        wrap.rotation.y = a
 
+        const edgeGeo = track(
+          new THREE.CylinderGeometry(1.004, 1.004, 0.202, 12, 1, false, Math.PI / 2 - 0.21, 0.42),
+        )
+        wrap.add(new THREE.Mesh(edgeGeo, ivory))
+
+        const inlayGeo = track(new THREE.RingGeometry(0.76, 0.96, 12, 1, -0.21, 0.42))
         const inlay = new THREE.Mesh(inlayGeo, ivory)
-        inlay.position.set(Math.cos(a) * 0.86, 0.107, Math.sin(a) * 0.86)
-        inlay.rotation.y = -(a + Math.PI / 2)
-        chip.add(inlay)
+        inlay.rotation.x = -Math.PI / 2
+        inlay.position.y = 0.1012
+        wrap.add(inlay)
+
+        chip.add(wrap)
       }
+      for (let i = 0; i < 6; i++) makeSpot((i / 6) * TAU)
 
       // ---------- свет ----------
       scene.add(new THREE.AmbientLight(0xfff2d9, 0.75))
