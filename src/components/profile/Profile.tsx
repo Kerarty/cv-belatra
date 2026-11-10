@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Bot, Code2, Gamepad2, GraduationCap, Languages, Palette, Terminal, Globe } from 'lucide-react'
 import { Section, Reveal, Chip } from '../ui/ui'
@@ -13,6 +14,58 @@ const TECH_ICONS: Record<TechSkill['icon'], typeof Code2> = {
   design: Palette,
 }
 
+const CHIP_EDGE_DASH = '15 6.72' // 12 сегментов по окружности r=41.5
+
+/** Жетон игрока: лицевая сторона — инициалы, обратная — демо-ставка из Slot Lab */
+function PlayerChip() {
+  const [flipped, setFlipped] = useState(false)
+  return (
+    <button
+      type="button"
+      className="player-chip"
+      onClick={() => setFlipped((v) => !v)}
+      aria-label={
+        flipped ? 'Жетон игрока. Показать инициалы' : 'Жетон игрока. Показать ставку'
+      }
+      title="Жетон игрока — нажми, чтобы перевернуть"
+    >
+      <motion.div
+        className="chip-flip"
+        initial={false}
+        animate={{ rotateY: flipped ? 180 : 0 }}
+        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <span className="chip-face">
+          <svg viewBox="0 0 96 96" aria-hidden="true">
+            <circle cx="48" cy="48" r="47" fill="var(--gold-deep)" />
+            <circle cx="48" cy="48" r="41.5" fill="none" stroke="var(--ivory)" strokeWidth="7" strokeDasharray={CHIP_EDGE_DASH} />
+            <circle cx="48" cy="48" r="33" fill="var(--ivory)" />
+            <circle cx="48" cy="48" r="33" fill="none" stroke="var(--gold-deep)" strokeWidth="1.2" opacity="0.55" />
+            <text x="48" y="57" textAnchor="middle" fontFamily="var(--font-display-ru)" fontSize="25" letterSpacing="1" fill="var(--gold-ink)">
+              ЯК
+            </text>
+          </svg>
+        </span>
+        <span className="chip-face chip-back">
+          <svg viewBox="0 0 96 96" aria-hidden="true">
+            <circle cx="48" cy="48" r="47" fill="var(--gold-deep)" />
+            <circle cx="48" cy="48" r="41.5" fill="none" stroke="var(--ivory)" strokeWidth="7" strokeDasharray={CHIP_EDGE_DASH} />
+            <circle cx="48" cy="48" r="33" fill="var(--ivory)" />
+            <circle cx="48" cy="48" r="33" fill="none" stroke="var(--gold-deep)" strokeWidth="1.2" opacity="0.55" />
+            <path d="M48 27.5 L50 31.5 L54 32 L51 34.8 L51.8 38.8 L48 36.8 L44.2 38.8 L45 34.8 L42 32 L46 31.5 Z" fill="var(--gold)" opacity="0.9" />
+            <text x="48" y="62" textAnchor="middle" fontFamily="var(--font-display)" fontSize="24" fontWeight="700" letterSpacing="1" fill="var(--gold-ink)">
+              20
+            </text>
+            <text x="48" y="73" textAnchor="middle" fontFamily="var(--font-body)" fontSize="6.5" fontWeight="700" letterSpacing="2.4" fill="var(--gold-mid)">
+              ДЕМО-СТАВКА
+            </text>
+          </svg>
+        </span>
+      </motion.div>
+    </button>
+  )
+}
+
 export function Profile() {
   return (
     <Section
@@ -24,9 +77,7 @@ export function Profile() {
       <div className="profile-grid">
         {/* ---- Левая колонка: карточка игрока ---- */}
         <Reveal className="player-card">
-          <div className="player-avatar" aria-hidden="true">
-            ЯК
-          </div>
+          <PlayerChip />
           <h3 className="player-name">{profile.name}</h3>
           <p className="player-role">{profile.role}</p>
 
