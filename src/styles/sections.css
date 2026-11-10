@@ -664,7 +664,7 @@
 }
 
 .symbols-cell-name .symbol-art {
-  color: var(--gold-mid);
+  color: var(--gold);
   flex-shrink: 0;
 }
 
