@@ -388,6 +388,8 @@
 .player-chip3d-wrap {
   align-self: center;
   margin-bottom: var(--sp-2);
+  /* компенсация правого паддинга карточки — жетон точно по центру колонки */
+  transform: translateX(var(--sp-3));
 }
 
 .player-chip3d {
