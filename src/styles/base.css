@@ -26,6 +26,12 @@ body {
     radial-gradient(800px 460px at 90% 20%, rgba(143, 107, 29, 0.05), transparent 60%),
     radial-gradient(900px 560px at 4% 85%, rgba(143, 107, 29, 0.045), transparent 62%);
   background-attachment: fixed;
+  /* плёночное зерно поверх градиентов (альфа запечена в SVG) */
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E"),
+    radial-gradient(1100px 520px at 50% -8%, rgba(212, 175, 55, 0.07), transparent 62%),
+    radial-gradient(800px 460px at 90% 20%, rgba(143, 107, 29, 0.05), transparent 60%),
+    radial-gradient(900px 560px at 4% 85%, rgba(143, 107, 29, 0.045), transparent 62%);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -75,18 +81,6 @@ a:hover {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--gold-deep);
-}
-
-/* Плёночное зерно — убирает «пластиковость» фона */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 2000;
-  pointer-events: none;
-  opacity: 0.05;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 h1,
