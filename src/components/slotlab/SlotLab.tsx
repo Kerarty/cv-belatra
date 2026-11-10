@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useMemo, useReducer, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Coins, RotateCcw, Sparkles, Star, Ticket, Wand2 } from 'lucide-react'
+import { Coins, RotateCcw, Route, Sparkles, Star, Ticket, Wand2 } from 'lucide-react'
 import { Section, Reveal } from '../ui/ui'
 import { Reel } from './Reel'
 import { PaylineOverlay } from './PaylineOverlay'
 import { EventLog } from './EventLog'
 import { PrizeParade } from '../bonus/PrizeParade'
+import { PaylineMap } from './PaylineMap'
 import { createInitialState, gameReducer, winningCells } from '../../game/reducer'
 import { evaluateGrid, spinGrid } from '../../game/engine'
 import type { BonusConfig } from '../../game/types'
@@ -33,6 +34,7 @@ const PAVILION_LABEL: Record<string, string> = {
 export function SlotLab({ config }: { config: BonusConfig }) {
   const [state, dispatch] = useReducer(gameReducer, undefined, createInitialState)
   const [stoppedCount, setStoppedCount] = useState(REEL_COUNT)
+  const [showLines, setShowLines] = useState(false)
 
   const phase = state.phase
   const spinning = phase === 'spinning'
@@ -148,6 +150,7 @@ export function SlotLab({ config }: { config: BonusConfig }) {
                 ))}
               </div>
               <PaylineOverlay wins={showWinMarks ? state.wins : []} />
+              <PaylineMap open={showLines} onClose={() => setShowLines(false)} />
 
               <AnimatePresence>
                 {phase === 'result' && state.lastWin > 0 && (
@@ -167,6 +170,17 @@ export function SlotLab({ config }: { config: BonusConfig }) {
             </div>
 
             <div className="machine-hud">
+              <button
+                className={`lines-toggle ${showLines ? 'lines-toggle-open' : ''}`}
+                onClick={() => setShowLines((v) => !v)}
+                aria-pressed={showLines}
+                title="Схема всех линий выплат"
+              >
+                <Route size={15} />
+                <span>
+                  Линии <b>9</b>
+                </span>
+              </button>
               <div className="hud-cell">
                 <Coins size={15} />
                 <span>

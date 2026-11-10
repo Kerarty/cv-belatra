@@ -765,3 +765,104 @@
     text-align: center;
   }
 }
+
+/* ---------- Кнопка и карта линий выплат ---------- */
+
+.lines-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13.5px;
+  color: var(--text-2);
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  cursor: pointer;
+  transition: all var(--t-fast);
+  white-space: nowrap;
+}
+
+.lines-toggle:hover {
+  color: var(--gold-bright);
+  border-color: var(--line-gold);
+}
+
+.lines-toggle b {
+  color: var(--gold-bright);
+}
+
+.lines-toggle-open {
+  color: var(--gold-bright);
+  border-color: var(--gold);
+  box-shadow: var(--glow-gold);
+}
+
+.lines-map {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: rgba(13, 10, 7, 0.94);
+  backdrop-filter: blur(6px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding: var(--sp-4) var(--sp-5);
+  overflow-y: auto;
+}
+
+.lines-map-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-display);
+  color: var(--gold-bright);
+  font-size: 14px;
+  letter-spacing: 0.12em;
+}
+
+.lines-map-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--sp-2);
+}
+
+.lines-tile {
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  padding: 8px 10px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  transition: border-color var(--t-fast);
+}
+
+.lines-tile:hover {
+  border-color: var(--line-gold);
+}
+
+.lines-tile svg {
+  width: 100%;
+  height: auto;
+}
+
+.lines-tile-path {
+  filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.6));
+}
+
+.lines-tile span {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  text-align: center;
+}
+
+.lines-map-note {
+  font-size: 12px;
+  color: var(--text-3);
+  border-left: 2px solid var(--line-gold);
+  padding-left: var(--sp-3);
+}
