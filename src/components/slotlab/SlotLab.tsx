@@ -146,16 +146,17 @@ export function SlotLab({ config }: { config: BonusConfig }) {
 
               <AnimatePresence>
                 {phase === 'result' && state.lastWin > 0 && (
-                  <motion.div
-                    key={state.spinCount}
-                    className="win-banner"
-                    initial={{ opacity: 0, scale: 0.6, y: 10 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.8 }}
-                    transition={{ type: 'spring', stiffness: 260, damping: 18 }}
-                  >
-                    WIN +{state.lastWin}
-                  </motion.div>
+                  <div className="win-banner-wrap" key={state.spinCount}>
+                    <motion.div
+                      className="win-banner"
+                      initial={{ opacity: 0, scale: 0.6 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.8 }}
+                      transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+                    >
+                      WIN +{state.lastWin}
+                    </motion.div>
+                  </div>
                 )}
               </AnimatePresence>
             </div>

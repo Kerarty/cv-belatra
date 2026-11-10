@@ -206,14 +206,19 @@
 
 /* ---------- Баннер выигрыша ---------- */
 
-.win-banner {
+.win-banner-wrap {
   position: absolute;
-  left: 50%;
-  top: 42%;
-  transform: translate(-50%, -50%);
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.win-banner {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: clamp(26px, 4.5vw, 44px);
+  font-size: clamp(24px, 4.5vw, 44px);
   color: #241500;
   background: var(--gold-grad);
   background-size: 200% auto;
@@ -221,7 +226,7 @@
   border-radius: var(--r-lg);
   box-shadow: 0 10px 44px rgba(240, 195, 78, 0.5);
   animation: shimmer 2s linear infinite;
-  pointer-events: none;
+  white-space: nowrap;
 }
 
 /* ---------- HUD машины ---------- */
