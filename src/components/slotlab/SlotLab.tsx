@@ -237,7 +237,7 @@ export function SlotLab({ config }: { config: BonusConfig }) {
 
       {/* ---------- Символы ---------- */}
       <Reveal delay={0.08}>
-        <h3 className="legend-title">Игровые символы</h3>
+        <h3 className="legend-title">Табл. I — Игровые символы и выплаты</h3>
         <div className="legend-grid">
           {SYMBOL_ORDER.map((id) => {
             const s = SYMBOLS[id]

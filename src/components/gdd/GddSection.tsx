@@ -107,6 +107,8 @@ export function GddSection() {
   const [active, setActive] = useState(GDD_SECTIONS[0].id)
   const current = GDD_SECTIONS.find((s) => s.id === active) ?? GDD_SECTIONS[0]
 
+  const plateNum = GDD_SECTIONS.findIndex((s) => s.id === current.id) + 1
+
   return (
     <Section
       id="gdd"
@@ -115,6 +117,11 @@ export function GddSection() {
       sub="Не просто готовая игра, а процесс проектирования: концепция, правила, параметры, крайние случаи и обоснование решений."
     >
       <Reveal>
+        <div className="gdd-plate" aria-label={`Лист документации ${plateNum} из ${GDD_SECTIONS.length}`}>
+          <span>Лист {plateNum} / {GDD_SECTIONS.length}</span>
+          <b>{current.label}</b>
+          <span>утв. Я. Кукар</span>
+        </div>
         <Tabs
           tabs={GDD_SECTIONS.map((s) => ({ id: s.id, label: s.label }))}
           active={active}

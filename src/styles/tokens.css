@@ -48,6 +48,8 @@
 
   /* --- Типографика --- */
   --font-display: 'Cinzel', 'Georgia', serif;
+  /* Русская антиква для кириллических заголовков (в Cinzel нет кириллицы) */
+  --font-display-ru: 'Oranienbaum', 'Georgia', serif;
   --font-body: 'Manrope', system-ui, -apple-system, sans-serif;
 
   /* --- Радиусы: прямые линии ар-деко --- */

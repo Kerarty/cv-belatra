@@ -22,7 +22,7 @@ export function Hero() {
 
       <div className="container hero-inner">
         <motion.span className="section-kicker hero-kicker" {...fadeUp} transition={{ duration: 0.5 }}>
-          Interactive Game Designer Portfolio
+          Интерактивное портфолио геймдизайнера
         </motion.span>
 
         <motion.h1 className="hero-title" {...fadeUp} transition={{ duration: 0.6, delay: 0.08 }}>
@@ -30,7 +30,8 @@ export function Hero() {
         </motion.h1>
 
         <motion.p className="hero-name" {...fadeUp} transition={{ duration: 0.6, delay: 0.16 }}>
-          {profile.name} · <span className="text-gold">{profile.role}</span>
+          {profile.name}
+          <span className="hero-role">{profile.role}</span>
         </motion.p>
 
         <motion.div className="hero-row" {...fadeUp} transition={{ duration: 0.65, delay: 0.24 }}>

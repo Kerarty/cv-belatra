@@ -31,7 +31,7 @@ export function PaylineMap({ open, onClose }: { open: boolean; onClose: () => vo
           aria-label="Схема всех линий выплат"
         >
           <div className="lines-map-head">
-            <b>◆ Линии выплат · 9</b>
+            <b>Фиг. 2 — линии выплат (9)</b>
             <button className="icon-btn" onClick={onClose} aria-label="Закрыть схему линий">
               <X size={16} />
             </button>

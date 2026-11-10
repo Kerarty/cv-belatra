@@ -52,6 +52,10 @@ export function Contact() {
         {/* Финальный экран */}
         <Reveal delay={0.1} className="final-wrap">
           <div className="final-screen">
+            <span className="final-stub">
+              <span>ADMIT ONE · NEON CARNIVAL</span>
+            </span>
+            <span className="final-num">№ 000 001</span>
             <div className="divider-ornament">
               <span className="final-spark">◆</span>
             </div>
@@ -71,11 +75,11 @@ export function Contact() {
       </div>
 
       <footer className="footer">
-        <span>
-          © 2026 {profile.name} · Game Design Studio
+        <span className="colophon">
+          © 2026 {profile.name} · Game Design Studio · Издание первое, Минск
         </span>
         <span>
-          React + TypeScript + Framer Motion ·{' '}
+          Набрано в Cinzel и Oranienbaum · React + TypeScript ·{' '}
           <a href="https://github.com/Kerarty/cv-belatra" target="_blank" rel="noreferrer">
             исходники
           </a>
