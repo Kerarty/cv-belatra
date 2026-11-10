@@ -99,7 +99,16 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
           : `Free spin ${bonus.spinsDone}: без выигрыша`
         const kind = evaluation.totalWin > 0 ? 'win' : 'info'
         return withEvent(
-          { ...state, phase: bonus.freeSpinsLeft > 0 ? 'bonusGame' : 'bonusResult', bonus, grid: state.grid },
+          {
+            ...state,
+            phase: bonus.freeSpinsLeft > 0 ? 'bonusGame' : 'bonusResult',
+            bonus,
+            grid: state.grid,
+            // Сохраняем выигрыш последнего фри-спина для подсветки линий
+            wins: evaluation.wins,
+            scatterCells: evaluation.scatterCells,
+            lastWin: evaluation.totalWin,
+          },
           kind,
           text,
         )
