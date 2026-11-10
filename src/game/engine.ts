@@ -24,9 +24,32 @@ function pickWeighted(extraWildWeight = 0): SymbolId {
 }
 
 export function spinGrid(extraWildWeight = 0): Grid {
-  return Array.from({ length: REELS }, () =>
+  const grid = Array.from({ length: REELS }, () =>
     Array.from({ length: ROWS }, () => pickWeighted(extraWildWeight)),
   )
+  return forceBonusDemo(grid)
+}
+
+/**
+ * QA-хук: `?demo=bonus` гарантирует 3 Scatter на первом спине,
+ * чтобы бонус Prize Parade можно было проверить без ожидания.
+ * Используется один раз за загрузку страницы (см. GDD · Testing).
+ */
+let bonusDemoUsed = false
+function forceBonusDemo(grid: Grid): Grid {
+  if (bonusDemoUsed || typeof window === 'undefined') return grid
+  if (new URLSearchParams(window.location.search).get('demo') !== 'bonus') return grid
+  bonusDemoUsed = true
+
+  const cells: Array<[number, number]> = []
+  for (let reel = 0; reel < REELS; reel++) for (let row = 0; row < ROWS; row++) cells.push([reel, row])
+  // перемешиваем и берём первые 3
+  for (let i = cells.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[cells[i], cells[j]] = [cells[j], cells[i]]
+  }
+  for (const [reel, row] of cells.slice(0, 3)) grid[reel][row] = 'ticket'
+  return grid
 }
 
 export interface EvaluateOptions {
