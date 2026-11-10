@@ -78,7 +78,7 @@
 
 .machine-badge {
   position: absolute;
-  right: var(--sp-5);
+  right: 34px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 10px;
@@ -91,9 +91,6 @@
   opacity: 0.95;
 }
 
-.machine-marquee .machine-title {
-  margin-inline: auto;
-}
 
 /* ---------- Бонусный HUD ---------- */
 

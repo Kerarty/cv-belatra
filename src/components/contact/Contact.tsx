@@ -2,12 +2,6 @@ import { Download, Github, Mail, Phone, Send } from 'lucide-react'
 import { Section, Reveal } from '../ui/ui'
 import { profile } from '../../data/profile'
 
-const MAILTO = `mailto:${profile.belatraMail}?subject=${encodeURIComponent(
-  'Отклик: Game Designer — Ярослав Кукар',
-)}&body=${encodeURIComponent(
-  `Здравствуйте!\n\nЯ — Ярослав Кукар, Junior Game Designer. Откликаюсь на вакансию Game Designer.\n\nИнтерактивное портфолио со слот-игрой Neon Carnival и бонусной механикой Prize Parade: https://kerarty.github.io/cv-belatra/\n\nPDF-резюме прикреплено.\n\nС уважением,\nЯрослав Кукар\n${profile.phone}\n${profile.email}`,
-)}`
-
 export function Contact() {
   return (
     <Section
@@ -51,10 +45,6 @@ export function Contact() {
             <a className="btn btn-gold btn-lg" href={profile.pdf} download>
               <Download size={18} />
               Скачать PDF-резюме
-            </a>
-            <a className="btn btn-outline btn-lg" href={MAILTO}>
-              <Mail size={18} />
-              Написать в Belatra
             </a>
           </div>
         </Reveal>
