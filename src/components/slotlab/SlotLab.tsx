@@ -88,7 +88,11 @@ export function SlotLab({ config }: { config: BonusConfig }) {
     return set
   }, [state.wins, state.scatterCells])
 
-  const dimWins = state.wins.length > 0 && phase === 'result'
+  // Метки результата: базовая игра и паузы между бесплатными вращениями в бонусе
+  const showWinMarks =
+    phase === 'result' || (inBonus && (phase === 'bonusGame' || phase === 'bonusResult'))
+  const dimWins =
+    state.wins.length > 0 && (phase === 'result' || (inBonus && phase === 'bonusGame'))
   const stopDelay = (i: number) => (inBonus ? 750 + i * 200 : 1050 + i * 260)
 
   return (
@@ -143,7 +147,7 @@ export function SlotLab({ config }: { config: BonusConfig }) {
                   />
                 ))}
               </div>
-              <PaylineOverlay wins={phase === 'result' ? state.wins : []} />
+              <PaylineOverlay wins={showWinMarks ? state.wins : []} />
 
               <AnimatePresence>
                 {phase === 'result' && state.lastWin > 0 && (
