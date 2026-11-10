@@ -183,11 +183,12 @@ export function PlayerChip3D() {
       let dragging = false
       let lastX = 0
       let lastY = 0
-      let autoSpin = true
+      // покачивание вместо полного вращения: инициалы всегда читаемы,
+      // полную раскрутку пользователь делает драгом
+      let dragOffsetY = 0
 
       const onDown = (e: PointerEvent) => {
         dragging = true
-        autoSpin = false
         lastX = e.clientX
         lastY = e.clientY
         host.classList.add('grabbing')
@@ -195,11 +196,11 @@ export function PlayerChip3D() {
       }
       const onMove = (e: PointerEvent) => {
         if (!dragging) return
-        pivot.rotation.y += (e.clientX - lastX) * 0.011
+        dragOffsetY += (e.clientX - lastX) * 0.011
         chip.rotation.x = THREE.MathUtils.clamp(
           chip.rotation.x + (e.clientY - lastY) * 0.008,
-          0.35,
-          1.7,
+          0.55,
+          1.45,
         )
         lastX = e.clientX
         lastY = e.clientY
@@ -208,10 +209,6 @@ export function PlayerChip3D() {
         dragging = false
         host.classList.remove('grabbing')
         renderer.domElement.releasePointerCapture(e.pointerId)
-        // вернуться к автовращению после паузы
-        window.setTimeout(() => {
-          if (!dragging) autoSpin = true
-        }, 2200)
       }
       renderer.domElement.addEventListener('pointerdown', onDown)
       renderer.domElement.addEventListener('pointermove', onMove)
@@ -222,7 +219,9 @@ export function PlayerChip3D() {
       let raf = 0
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
       const tick = () => {
-        if (autoSpin && !dragging && !reduced) pivot.rotation.y += 0.0075
+        // мягкое покачивание ±~28° вокруг драг-смещения
+        const sway = reduced || dragging ? 0 : Math.sin(performance.now() / 1600) * 0.5
+        pivot.rotation.y = dragOffsetY + sway
         renderer.render(scene, camera)
         raf = window.requestAnimationFrame(tick)
       }
