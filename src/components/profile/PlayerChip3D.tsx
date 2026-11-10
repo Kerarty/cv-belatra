@@ -164,8 +164,9 @@ export function PlayerChip3D() {
         const wrap = new THREE.Group()
         wrap.rotation.y = a
 
+        // openEnded: только гнутый борт — без крышек-«пирогов», закрывающих «ЯК»
         const edgeGeo = track(
-          new THREE.CylinderGeometry(1.004, 1.004, 0.202, 12, 1, false, Math.PI / 2 - 0.21, 0.42),
+          new THREE.CylinderGeometry(1.004, 1.004, 0.202, 12, 1, true, Math.PI / 2 - 0.21, 0.42),
         )
         wrap.add(new THREE.Mesh(edgeGeo, ivory))
 
