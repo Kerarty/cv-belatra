@@ -11,8 +11,8 @@ const fadeUp = {
 export function Hero() {
   return (
     <section id="start" className="hero">
-      <div className="glow-orb" style={{ width: 480, height: 480, top: -120, left: '50%', transform: 'translateX(-50%)', background: 'rgba(212,175,55,0.14)' }} />
-      <div className="glow-orb" style={{ width: 340, height: 340, bottom: -40, right: '4%', background: 'rgba(143,107,29,0.12)' }} />
+      <div className="glow-orb" style={{ width: 480, height: 480, top: -120, left: '50%', transform: 'translateX(-50%)', background: 'rgba(212,175,55,0.07)' }} />
+      <div className="glow-orb" style={{ width: 340, height: 340, bottom: -40, right: '4%', background: 'rgba(143,107,29,0.06)' }} />
 
       {/* Угловые орнаменты ар-деко */}
       <span className="hero-corner tl" aria-hidden="true" />
@@ -26,7 +26,7 @@ export function Hero() {
         </motion.span>
 
         <motion.h1 className="hero-title" {...fadeUp} transition={{ duration: 0.6, delay: 0.08 }}>
-          GAME DESIGN <span className="hero-title-gold">STUDIO</span>
+          Game Design <span className="hero-title-gold">Studio</span>
         </motion.h1>
 
         <motion.p className="hero-name" {...fadeUp} transition={{ duration: 0.6, delay: 0.16 }}>
@@ -56,21 +56,15 @@ export function Hero() {
               </a>
             </div>
 
-            <div className="hero-stats">
-              {profile.stats.map((s) => (
-                <div key={s.label} className="stat">
-                  <b>{s.value}</b>
-                  <span>{s.label}</span>
-                </div>
-              ))}
-            </div>
+            <p className="hero-note">
+              6 игровых проектов и 15+ плейтест-сессий — каждую цифру можно проверить прямо
+              на этой странице.
+            </p>
 
             <div className="hero-meta">
               <span>{profile.location}</span>
-              <span className="dot">◆</span>
-              <span>БГУИР 2023—2027</span>
-              <span className="dot">◆</span>
-              <span>Слоты · Механики · Баланс</span>
+              <span>БГУИР, 2023—2027</span>
+              <span>Слоты, механики, баланс</span>
             </div>
           </div>
         </motion.div>

@@ -42,12 +42,11 @@
 .btn-gold {
   background: var(--gold-grad);
   color: #241a05;
-  box-shadow: var(--glow-gold);
 }
 
 .btn-gold:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 30px rgba(212, 175, 55, 0.45);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 18px rgba(212, 175, 55, 0.3);
 }
 
 .btn-outline {
@@ -59,7 +58,6 @@
 .btn-outline:hover:not(:disabled) {
   border-color: var(--gold);
   color: var(--gold-bright);
-  transform: translateY(-2px);
 }
 
 .btn-ghost {
@@ -96,15 +94,13 @@
 .chip {
   display: inline-flex;
   align-items: center;
-  padding: 3px 10px;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  padding: 2px 9px;
+  font-size: 12px;
+  font-weight: 700;
   border: 1px solid var(--line);
-  border-radius: 2px;
+  border-radius: 1px;
   color: var(--text-2);
-  background: var(--surface);
+  background: transparent;
 }
 
 .chip-link {
@@ -133,10 +129,10 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: 10px 14px;
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-  background: var(--surface);
+  padding: 10px 0 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
 }
 
 .stat b {
@@ -171,29 +167,26 @@
 
 .tab {
   flex-shrink: 0;
-  padding: 8px 16px;
-  border-radius: 2px;
-  border: 1px solid var(--line);
-  border-bottom-width: 2px;
-  background: var(--surface);
+  padding: 8px 2px;
+  margin-right: 20px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  background: transparent;
   color: var(--text-2);
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 700;
-  letter-spacing: 0.02em;
   cursor: pointer;
-  transition: all var(--t-fast);
+  transition: color var(--t-fast), border-color var(--t-fast);
 }
 
 .tab:hover {
   color: var(--text-1);
-  border-color: var(--line-strong);
 }
 
 .tab.active {
-  background: var(--gold-grad);
-  color: #241a05;
-  border-color: var(--gold-deep);
-  box-shadow: var(--glow-gold);
+  color: var(--gold-bright);
+  border-bottom-color: var(--gold);
 }
 
 /* ---------- Модальное окно ---------- */

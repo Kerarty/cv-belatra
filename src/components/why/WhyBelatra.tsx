@@ -55,23 +55,6 @@ export function WhyBelatra() {
           )
         })}
       </div>
-
-      <Reveal delay={0.12}>
-        <div className="why-facts">
-          <div className="stat">
-            <b>1993</b>
-            <span>год основания</span>
-          </div>
-          <div className="stat">
-            <b>150+</b>
-            <span>онлайн-игр</span>
-          </div>
-          <div className="stat">
-            <b>iGaming</b>
-            <span>профиль компании</span>
-          </div>
-        </div>
-      </Reveal>
     </Section>
   )
 }

@@ -28,7 +28,7 @@
   border: 1.5px solid var(--line-gold);
   border-radius: var(--r-xl);
   background: linear-gradient(175deg, var(--bg-2), var(--bg-1) 60%, var(--bg-0));
-  box-shadow: var(--shadow-card), var(--glow-violet);
+  box-shadow: var(--shadow-card);
   overflow: hidden;
 }
 
@@ -59,12 +59,7 @@
   font-weight: 800;
   letter-spacing: 0.3em;
   font-size: 15px;
-  background: var(--gold-grad);
-  background-size: 100% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: shimmer 5s linear infinite;
+  color: var(--gold-bright);
 }
 
 .lamp {
@@ -100,7 +95,7 @@
   gap: var(--sp-2) var(--sp-4);
   align-items: center;
   padding: var(--sp-2) var(--sp-5);
-  background: rgba(212, 175, 55, 0.08);
+  background: transparent;
   border-bottom: 1px solid var(--line);
   font-size: 13px;
   color: var(--text-2);
@@ -316,8 +311,7 @@
   font-size: 16px;
   letter-spacing: 0.22em;
   cursor: pointer;
-  box-shadow: var(--glow-gold);
-  transition: transform var(--t-fast), box-shadow var(--t-fast), opacity var(--t-fast);
+  transition: transform var(--t-fast), opacity var(--t-fast);
 }
 
 .spin-btn::before,
@@ -328,9 +322,8 @@
 }
 
 .spin-btn:hover:not(:disabled) {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 36px rgba(212, 175, 55, 0.5);
-  animation: shimmer 2s linear infinite;
+  transform: translateY(-1px);
+  background: linear-gradient(180deg, #fff0c4 0%, #e6c054 55%, #b3861f 100%);
 }
 
 .spin-btn:disabled {
@@ -420,10 +413,10 @@
 
 .event-item {
   font-size: 12.5px;
-  padding: 8px 10px;
-  border-radius: var(--r-sm);
-  border-left: 3px solid var(--line-strong);
-  background: var(--bg-1);
+  padding: 7px 2px 7px 10px;
+  border-radius: 0;
+  border-left: 2px solid var(--line-strong);
+  background: transparent;
   color: var(--text-2);
   line-height: 1.45;
 }
@@ -557,7 +550,7 @@
   border: 1.5px solid var(--line-gold);
   border-radius: var(--r-xl);
   background: linear-gradient(170deg, var(--bg-2), var(--bg-0));
-  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.7), var(--glow-gold);
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.7);
   padding: var(--sp-7) var(--sp-6);
 }
 
@@ -633,8 +626,7 @@
 }
 
 .pavilion-active {
-  border-color: var(--gold-bright);
-  box-shadow: var(--glow-gold);
+  border-color: var(--gold);
 }
 
 .pavilion-dim {
@@ -670,8 +662,7 @@
   color: #241a05;
   background: var(--gold-grad);
   border-radius: 50%;
-  box-shadow: var(--glow-gold);
-}
+  }
 
 .pavilion b {
   font-size: 15.5px;
@@ -703,8 +694,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--glow-gold);
-}
+  }
 
 .bonus-actions {
   display: flex;
@@ -732,8 +722,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--glow-gold);
-}
+  }
 
 .bonus-result h3 {
   font-family: var(--font-display);
@@ -795,8 +784,7 @@
 .lines-toggle-open {
   color: var(--gold-bright);
   border-color: var(--gold);
-  box-shadow: var(--glow-gold);
-}
+  }
 
 .lines-map {
   position: absolute;

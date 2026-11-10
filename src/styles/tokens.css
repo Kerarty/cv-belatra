@@ -41,8 +41,8 @@
   --line-strong: rgba(212, 175, 55, 0.42);
   --line-gold: rgba(212, 175, 55, 0.55);
 
-  --glow-gold: 0 0 20px rgba(212, 175, 55, 0.22);
-  --glow-violet: 0 0 22px rgba(212, 175, 55, 0.16);
+  --glow-gold: 0 0 12px rgba(212, 175, 55, 0.16);
+  --glow-violet: 0 0 14px rgba(212, 175, 55, 0.1);
   --glow-teal: 0 0 16px rgba(212, 175, 55, 0.2);
   --shadow-card: 0 14px 40px rgba(6, 4, 2, 0.6);
 

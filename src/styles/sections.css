@@ -166,20 +166,15 @@
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(38px, 6vw, 72px);
+  font-size: clamp(40px, 6vw, 76px);
   font-weight: 800;
-  line-height: 1.04;
-  letter-spacing: 0.03em;
+  line-height: 1.02;
+  letter-spacing: -0.005em;
   margin-top: var(--sp-2);
 }
 
 .hero-title-gold {
-  background: var(--gold-grad);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: shimmer 5s linear infinite;
+  color: var(--gold);
 }
 
 .hero-name {
@@ -216,26 +211,19 @@
   gap: var(--sp-3);
 }
 
-.hero-stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--sp-2);
+.hero-note {
+  font-size: 14px;
+  color: var(--text-3);
+  max-width: 52ch;
 }
 
 .hero-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--sp-3);
+  gap: var(--sp-2) var(--sp-5);
   color: var(--text-3);
   font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.04em;
-}
-
-.hero-meta .dot {
-  color: var(--gold);
-  font-size: 8px;
-  align-self: center;
 }
 
 .hero-scroll {
@@ -377,10 +365,8 @@
 }
 
 .player-card {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--r-xl);
-  padding: var(--sp-6);
+  padding: var(--sp-2) var(--sp-6) 0 0;
+  border-right: 1px solid var(--line);
   display: flex;
   flex-direction: column;
   gap: var(--sp-4);
@@ -467,10 +453,12 @@
   flex-wrap: wrap;
 }
 
-.player-stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--sp-2);
+.player-note {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-3);
+  border-top: 1px solid var(--line);
+  padding-top: var(--sp-3);
 }
 
 .profile-main {
@@ -499,16 +487,15 @@
 }
 
 .skill-card {
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-  padding: var(--sp-4);
-  background: var(--surface);
-  transition: border-color var(--t-fast), transform var(--t-fast);
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  padding: var(--sp-4) 0 var(--sp-2);
+  background: transparent;
+  transition: border-color var(--t-fast);
 }
 
 .skill-card:hover {
-  border-color: var(--line-gold);
-  transform: translateY(-2px);
+  border-top-color: var(--line-strong);
 }
 
 .skill-top {
@@ -525,18 +512,17 @@
 }
 
 .skill-bar {
-  height: 6px;
-  border-radius: 999px;
-  background: var(--bg-0);
+  height: 3px;
+  border-radius: 0;
+  background: rgba(212, 175, 55, 0.14);
   margin: var(--sp-2) 0;
   overflow: hidden;
 }
 
 .skill-bar-fill {
   height: 100%;
-  border-radius: 999px;
-  background: var(--gold-grad);
-  box-shadow: var(--glow-gold);
+  border-radius: 0;
+  background: var(--gold);
 }
 
 .skill-note {
@@ -560,10 +546,10 @@
 .tech-card {
   display: flex;
   gap: var(--sp-3);
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-  padding: var(--sp-4);
-  background: var(--surface);
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  padding: var(--sp-4) 0 var(--sp-2);
+  background: transparent;
 }
 
 .tech-icon {
@@ -603,10 +589,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--sp-4);
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  background: var(--surface);
-  padding: var(--sp-6);
+  border-top: 1px solid var(--line);
+  padding: var(--sp-5) 0 0;
 }
 
 .gdd-text {
@@ -732,10 +716,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--sp-5);
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  background: var(--surface);
-  padding: var(--sp-6);
+  border-top: 1px solid var(--line);
+  padding: var(--sp-5) 0 0;
 }
 
 .tune-row {
@@ -786,8 +768,8 @@
 }
 
 .tuning-readout {
-  border: 1px solid var(--line-strong);
-  border-radius: var(--r-lg);
+  border: 1px solid var(--line);
+  border-radius: 2px;
   background: var(--bg-1);
   padding: var(--sp-5);
   display: flex;
@@ -853,16 +835,15 @@
   flex-direction: column;
   gap: var(--sp-3);
   border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  background: var(--surface);
+  border-radius: 2px;
+  background: transparent;
   padding: var(--sp-5);
-  transition: border-color var(--t-med), transform var(--t-med), box-shadow var(--t-med);
+  transition: border-color var(--t-med), background var(--t-med);
 }
 
 .project-card:hover {
   border-color: var(--line-gold);
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-card), var(--glow-gold);
+  background: rgba(212, 175, 55, 0.03);
 }
 
 .project-head {
@@ -915,7 +896,6 @@
 .project-metrics .stat {
   flex: 1;
   min-width: 90px;
-  padding: 8px 12px;
 }
 
 .project-metrics .stat b {
@@ -1003,20 +983,13 @@
 }
 
 .process-step {
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  background: var(--surface);
-  padding: var(--sp-5);
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  padding: var(--sp-4) 0 0;
   display: flex;
   flex-direction: column;
   gap: var(--sp-2);
-  position: relative;
-  transition: border-color var(--t-fast), transform var(--t-fast);
-}
-
-.process-step:hover {
-  border-color: var(--line-gold);
-  transform: translateY(-3px);
 }
 
 .process-num {
@@ -1059,10 +1032,8 @@
 
 .pipeline {
   margin-top: var(--sp-6);
-  border: 1px solid var(--line-strong);
-  border-radius: var(--r-xl);
-  background: linear-gradient(160deg, rgba(212, 175, 55, 0.08), rgba(212, 175, 55, 0.05));
-  padding: var(--sp-6);
+  border-top: 1px solid var(--line-strong);
+  padding: var(--sp-5) 0 0;
   display: flex;
   flex-direction: column;
   gap: var(--sp-4);
@@ -1092,11 +1063,9 @@
 /* ---------- Why Belatra ---------- */
 
 .why-intro {
-  border: 1px solid var(--line-gold);
-  background: rgba(212, 175, 55, 0.06);
-  border-radius: var(--r-xl);
-  padding: var(--sp-6);
-  margin-bottom: var(--sp-5);
+  border-left: 2px solid var(--gold);
+  padding: var(--sp-1) 0 var(--sp-1) var(--sp-5);
+  margin-bottom: var(--sp-6);
 }
 
 .why-intro p {
@@ -1113,30 +1082,17 @@
 
 .why-card {
   height: 100%;
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  background: var(--surface);
-  padding: var(--sp-5);
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  padding: var(--sp-5) 0 0;
   display: flex;
   flex-direction: column;
   gap: var(--sp-3);
-  transition: border-color var(--t-fast), transform var(--t-fast);
-}
-
-.why-card:hover {
-  border-color: var(--line-gold);
-  transform: translateY(-3px);
 }
 
 .why-icon {
-  width: 46px;
-  height: 46px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--r-md);
-  background: var(--gold-grad);
-  color: #241a05;
+  color: var(--gold);
 }
 
 .why-card h3 {
@@ -1149,17 +1105,6 @@
   color: var(--text-2);
 }
 
-.why-facts {
-  margin-top: var(--sp-5);
-  display: flex;
-  gap: var(--sp-3);
-  flex-wrap: wrap;
-}
-
-.why-facts .stat {
-  flex: 1;
-  min-width: 140px;
-}
 
 /* ---------- Контакты ---------- */
 
@@ -1180,18 +1125,17 @@
   display: flex;
   align-items: center;
   gap: var(--sp-4);
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-  background: var(--surface);
-  padding: var(--sp-4) var(--sp-5);
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  padding: var(--sp-4) 0;
   color: var(--text-1);
-  transition: border-color var(--t-fast), transform var(--t-fast);
+  transition: border-color var(--t-fast), color var(--t-fast);
 }
 
 .contact-card:hover {
-  border-color: var(--line-gold);
-  transform: translateX(4px);
-  color: var(--text-1);
+  border-color: var(--line-strong);
+  color: var(--gold-bright);
 }
 
 .contact-card svg {
@@ -1224,11 +1168,9 @@
 
 .final-screen {
   flex: 1;
-  border: 1px solid var(--line-strong);
-  border-radius: var(--r-xl);
-  background:
-    radial-gradient(400px 240px at 50% 0%, rgba(212, 175, 55, 0.18), transparent),
-    var(--bg-1);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--bg-1);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1251,12 +1193,7 @@
 }
 
 .final-gold {
-  background: var(--gold-grad);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: shimmer 4s linear infinite;
+  color: var(--gold);
 }
 
 .final-sub {
@@ -1280,4 +1217,21 @@
   .contact-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Кикер оставлен только на hero — как вывеска, а не шаблонная надпись */
+.hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.hero-kicker::before {
+  content: '◆';
+  font-size: 8px;
 }

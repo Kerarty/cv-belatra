@@ -4,40 +4,33 @@ import { X } from 'lucide-react'
 
 /* ---------- Появление при скролле ---------- */
 
+/**
+ * Обёртка секционного контента. Намеренно статична: скролл ничего не анимирует,
+ * движение живёт только в hero-входе и слот-машине.
+ */
 export function Reveal({
   children,
-  delay = 0,
   className,
 }: {
   children: ReactNode
   delay?: number
   className?: string
 }) {
-  return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y: 26 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
-    >
-      {children}
-    </motion.div>
-  )
+  return <div className={className}>{children}</div>
 }
 
 /* ---------- Секция ---------- */
 
 export function Section({
   id,
-  kicker,
   title,
   sub,
   children,
   className,
 }: {
   id: string
-  kicker: string
+  /** Устарело: eyebrow-надзаголовки убраны из дизайна */
+  kicker?: string
   title: string
   sub?: string
   children: ReactNode
@@ -46,11 +39,10 @@ export function Section({
   return (
     <section id={id} className={`section ${className ?? ''}`}>
       <div className="container">
-        <Reveal className="section-head">
-          <span className="section-kicker">{kicker}</span>
+        <header className="section-head">
           <h2 className="section-title">{title}</h2>
           {sub && <p className="section-sub">{sub}</p>}
-        </Reveal>
+        </header>
         {children}
       </div>
     </section>

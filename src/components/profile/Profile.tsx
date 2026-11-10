@@ -51,14 +51,10 @@ export function Profile() {
             ))}
           </div>
 
-          <div className="player-stats">
-            {profile.stats.map((s) => (
-              <div key={s.label} className="stat">
-                <b>{s.value}</b>
-                <span>{s.label}</span>
-              </div>
-            ))}
-          </div>
+          <p className="player-note">
+            6 проектов, 15+ плейтестов, 9 слот-механик в демо — статистика живая, всё можно
+            проверить в разделах ниже.
+          </p>
         </Reveal>
 
         {/* ---- Правая колонка ---- */}
