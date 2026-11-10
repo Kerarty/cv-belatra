@@ -3,6 +3,47 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight, Lightbulb } from 'lucide-react'
 import { Section, Reveal, Tabs } from '../ui/ui'
 import { GDD_SECTIONS, type GddBlock } from '../../data/gdd'
+import { ROLE_LABELS, SYMBOL_ORDER, SYMBOLS } from '../../data/symbols'
+import { SymbolArt } from '../slotlab/SymbolArt'
+
+function SymbolsTable() {
+  return (
+    <div className="gdd-table-wrap">
+      <table className="gdd-table gdd-table-symbols">
+        <thead>
+          <tr>
+            <th>Символ</th>
+            <th>Роль</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+            <th>Функция</th>
+          </tr>
+        </thead>
+        <tbody>
+          {SYMBOL_ORDER.map((id) => {
+            const s = SYMBOLS[id]
+            return (
+              <tr key={id}>
+                <td>
+                  <span className="symbols-cell-name">
+                    <SymbolArt id={id} size={26} />
+                    <b>{s.name}</b>
+                  </span>
+                </td>
+                <td>{ROLE_LABELS[s.role]}</td>
+                <td>{s.pays[0]}</td>
+                <td>{s.pays[1]}</td>
+                <td>{s.pays[2]}</td>
+                <td>{s.fn}</td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+    </div>
+  )
+}
 
 function Block({ block }: { block: GddBlock }) {
   switch (block.kind) {
@@ -57,6 +98,8 @@ function Block({ block }: { block: GddBlock }) {
           <p>{block.body}</p>
         </div>
       )
+    case 'symbols-table':
+      return <SymbolsTable />
   }
 }
 

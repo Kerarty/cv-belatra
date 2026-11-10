@@ -1,8 +1,7 @@
-import { SYMBOLS, SYMBOL_ORDER } from './symbols'
 
 /**
  * Структура документации Neon Carnival.
- * Каждый блок рендерится в разделе GDD: text / list / table / flow / note.
+ * Каждый блок рендерится в разделе GDD: text / list / table / flow / note / symbols-table.
  */
 export type GddBlock =
   | { kind: 'text'; body: string }
@@ -10,6 +9,7 @@ export type GddBlock =
   | { kind: 'table'; head: string[]; rows: string[][] }
   | { kind: 'flow'; steps: string[] }
   | { kind: 'note'; body: string }
+  | { kind: 'symbols-table' }
 
 export interface GddSectionData {
   id: string
@@ -93,14 +93,7 @@ export const GDD_SECTIONS: GddSectionData[] = [
     id: 'symbols',
     label: 'Symbols',
     blocks: [
-      {
-        kind: 'table',
-        head: ['Символ', 'Роль', '3', '4', '5', 'Функция'],
-        rows: SYMBOL_ORDER.map((id) => {
-          const s = SYMBOLS[id]
-          return [`${s.emoji} ${s.name}`, s.role, String(s.pays[0]), String(s.pays[1]), String(s.pays[2]), s.fn]
-        }),
-      },
+      { kind: 'symbols-table' },
       {
         kind: 'note',
         body: 'Веса выпадения подобраны так, чтобы премиальные символы чувствовались редкими, а низкие — поддерживали ритм. Точные веса — в Parameters.',

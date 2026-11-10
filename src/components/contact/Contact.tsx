@@ -63,7 +63,7 @@ export function Contact() {
         <Reveal delay={0.1} className="final-wrap">
           <div className="final-screen">
             <div className="divider-ornament">
-              <span className="final-spark">✦</span>
+              <span className="final-spark">◆</span>
             </div>
             <h3 className="final-title">
               LET&rsquo;S CREATE
@@ -74,7 +74,7 @@ export function Contact() {
               {profile.name} · {profile.role}
             </p>
             <div className="divider-ornament">
-              <span className="final-spark">✦</span>
+              <span className="final-spark">◆</span>
             </div>
           </div>
         </Reveal>

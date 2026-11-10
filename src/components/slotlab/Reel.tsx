@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { SYMBOLS, SYMBOL_ORDER } from '../../data/symbols'
 import type { SymbolId } from '../../game/types'
+import { SymbolArt } from './SymbolArt'
 
 function randomSymbolId(): SymbolId {
   return SYMBOL_ORDER[Math.floor(Math.random() * SYMBOL_ORDER.length)]
@@ -80,12 +81,9 @@ export function Reel({ index, symbols, spinning, stopDelay, onStopped, highlight
             ]
               .filter(Boolean)
               .join(' ')}
-            style={{ background: sym.bg }}
             aria-label={sym.name}
           >
-            <span className="cell-emoji" style={{ color: sym.color }}>
-              {sym.emoji}
-            </span>
+            <SymbolArt id={id} className={selfSpinning ? 'cell-blur' : ''} />
           </div>
         )
       })}

@@ -4,7 +4,7 @@
 
 .slotlab-section {
   background:
-    radial-gradient(800px 400px at 50% 10%, rgba(160, 107, 255, 0.12), transparent 65%);
+    radial-gradient(800px 400px at 50% 10%, rgba(212, 175, 55, 0.12), transparent 65%);
 }
 
 .slotlab-grid {
@@ -24,53 +24,75 @@
 /* ---------- Корпус машины ---------- */
 
 .machine {
-  border: 2px solid var(--line-strong);
+  position: relative;
+  border: 1.5px solid var(--line-gold);
   border-radius: var(--r-xl);
   background: linear-gradient(175deg, var(--bg-2), var(--bg-1) 60%, var(--bg-0));
   box-shadow: var(--shadow-card), var(--glow-violet);
   overflow: hidden;
 }
 
+/* Внутренняя рамка-паспарту в стиле ар-деко */
+.machine::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--r-xl) - 4px);
+  pointer-events: none;
+  z-index: 1;
+}
+
 .machine-marquee {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: var(--sp-3);
-  padding: var(--sp-3) var(--sp-5);
-  background: linear-gradient(90deg, rgba(240, 195, 78, 0.1), rgba(160, 107, 255, 0.12), rgba(240, 195, 78, 0.1));
+  justify-content: center;
+  gap: var(--sp-4);
+  padding: var(--sp-4) var(--sp-5) var(--sp-3);
+  background: linear-gradient(180deg, rgba(212, 175, 55, 0.14), rgba(212, 175, 55, 0.04));
   border-bottom: 1px solid var(--line-strong);
 }
 
 .machine-title {
   font-family: var(--font-display);
-  font-weight: 900;
-  letter-spacing: 0.28em;
+  font-weight: 800;
+  letter-spacing: 0.3em;
   font-size: 15px;
   background: var(--gold-grad);
-  background-size: 200% auto;
+  background-size: 100% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: shimmer 4s linear infinite;
+  animation: shimmer 5s linear infinite;
 }
 
 .lamp {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 1px;
   background: var(--gold);
+  transform: rotate(45deg);
   animation: pulse-glow 1.8s ease-in-out infinite;
 }
 
 .machine-badge {
-  margin-left: auto;
-  font-size: 11px;
+  position: absolute;
+  right: var(--sp-5);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
   font-weight: 800;
-  letter-spacing: 0.14em;
-  color: var(--turquoise);
-  border: 1px solid var(--turquoise);
-  border-radius: 999px;
+  letter-spacing: 0.16em;
+  color: var(--gold-bright);
+  border: 1px solid var(--line-gold);
+  border-radius: 2px;
   padding: 3px 10px;
-  opacity: 0.9;
+  opacity: 0.95;
+}
+
+.machine-marquee .machine-title {
+  margin-inline: auto;
 }
 
 /* ---------- Бонусный HUD ---------- */
@@ -81,7 +103,7 @@
   gap: var(--sp-2) var(--sp-4);
   align-items: center;
   padding: var(--sp-2) var(--sp-5);
-  background: rgba(53, 224, 200, 0.07);
+  background: rgba(212, 175, 55, 0.08);
   border-bottom: 1px solid var(--line);
   font-size: 13px;
   color: var(--text-2);
@@ -122,7 +144,7 @@
   position: relative;
   padding: var(--sp-5);
   background:
-    radial-gradient(600px 220px at 50% 0%, rgba(91, 46, 158, 0.25), transparent 70%);
+    radial-gradient(600px 220px at 50% 0%, rgba(143, 107, 29, 0.25), transparent 70%);
 }
 
 .reels-grid {
@@ -140,8 +162,13 @@
 
 .reel-cell {
   aspect-ratio: 1;
-  border-radius: var(--r-md);
-  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  border: 1px solid rgba(143, 107, 29, 0.5);
+  background: var(--ivory-grad);
+  box-shadow:
+    inset 0 3px 7px rgba(95, 71, 15, 0.22),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.65),
+    0 1px 0 rgba(0, 0, 0, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -149,20 +176,34 @@
   overflow: hidden;
 }
 
-.cell-emoji {
-  font-size: clamp(24px, 4.2vw, 40px);
-  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.55));
-  user-select: none;
+/* Гравюра символа на кости */
+.reel-cell .symbol-art {
+  width: 74%;
+  height: 74%;
+  color: var(--gold-mid);
 }
 
 .reel-spinning .cell-blur {
   filter: blur(2.5px);
 }
 
+.symbol-art.cell-blur {
+  filter: blur(2.5px);
+}
+
 .cell-win {
-  border-color: var(--gold-bright);
-  box-shadow: 0 0 18px rgba(240, 195, 78, 0.55), inset 0 0 12px rgba(240, 195, 78, 0.25);
+  border-color: var(--gold);
+  box-shadow:
+    inset 0 3px 7px rgba(95, 71, 15, 0.18),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.7),
+    0 0 16px rgba(212, 175, 55, 0.55),
+    inset 0 0 14px rgba(212, 175, 55, 0.28);
   animation: win-pop 0.5s var(--ease-out);
+}
+
+.cell-win .symbol-art {
+  color: var(--gold-ink);
+  filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.65));
 }
 
 .cell-dim {
@@ -195,7 +236,7 @@
   stroke-dasharray: 240;
   stroke-dashoffset: 240;
   animation: draw-line 0.7s var(--ease-out) forwards;
-  filter: drop-shadow(0 0 6px rgba(240, 195, 78, 0.8));
+  filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.8));
 }
 
 @keyframes draw-line {
@@ -219,12 +260,13 @@
   font-family: var(--font-display);
   font-weight: 900;
   font-size: clamp(24px, 4.5vw, 44px);
-  color: #241500;
+  color: #241a05;
   background: var(--gold-grad);
   background-size: 200% auto;
-  padding: 10px 30px;
-  border-radius: var(--r-lg);
-  box-shadow: 0 10px 44px rgba(240, 195, 78, 0.5);
+  padding: 10px 34px;
+  border-radius: 4px;
+  border: 1px solid var(--gold-deep);
+  box-shadow: 0 10px 44px rgba(212, 175, 55, 0.5);
   animation: shimmer 2s linear infinite;
   white-space: nowrap;
 }
@@ -265,25 +307,32 @@
   margin-left: auto;
   display: inline-flex;
   align-items: center;
-  gap: var(--sp-2);
-  padding: 13px 34px;
-  border: none;
-  border-radius: 999px;
+  gap: var(--sp-3);
+  padding: 13px 36px;
+  border: 1px solid var(--gold-deep);
+  border-radius: 4px;
   background: var(--gold-grad);
-  background-size: 200% auto;
-  color: #241500;
+  background-size: 100% auto;
+  color: #241a05;
   font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 17px;
-  letter-spacing: 0.12em;
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 0.22em;
   cursor: pointer;
   box-shadow: var(--glow-gold);
   transition: transform var(--t-fast), box-shadow var(--t-fast), opacity var(--t-fast);
 }
 
+.spin-btn::before,
+.spin-btn::after {
+  content: '◆';
+  font-size: 9px;
+  letter-spacing: 0;
+}
+
 .spin-btn:hover:not(:disabled) {
   transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 36px rgba(240, 195, 78, 0.5);
+  box-shadow: 0 8px 36px rgba(212, 175, 55, 0.5);
   animation: shimmer 2s linear infinite;
 }
 
@@ -383,7 +432,7 @@
 }
 
 .ev-info {
-  border-left-color: var(--violet);
+  border-left-color: var(--gold-deep);
 }
 
 .ev-win {
@@ -392,8 +441,9 @@
 }
 
 .ev-bonus {
-  border-left-color: var(--turquoise);
-  color: var(--turquoise);
+  border-left-color: var(--gold-bright);
+  color: var(--ivory);
+  background: rgba(212, 175, 55, 0.1);
 }
 
 .ev-lose {
@@ -447,16 +497,22 @@
   border-color: var(--line-strong);
 }
 
-.legend-emoji {
-  width: 54px;
-  height: 54px;
+.legend-emoji,
+.legend-art {
+  width: 58px;
+  height: 58px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
-  border-radius: var(--r-md);
-  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  border: 1px solid var(--line-gold);
+  background: var(--ivory-grad);
+  box-shadow: inset 0 2px 5px rgba(95, 71, 15, 0.18);
+}
+
+.legend-art .symbol-art {
+  color: var(--gold-mid);
 }
 
 .legend-top {
@@ -501,11 +557,20 @@
 .bonus-panel {
   position: relative;
   width: min(880px, 100%);
-  border: 2px solid var(--line-gold);
+  border: 1.5px solid var(--line-gold);
   border-radius: var(--r-xl);
   background: linear-gradient(170deg, var(--bg-2), var(--bg-0));
   box-shadow: 0 40px 120px rgba(0, 0, 0, 0.7), var(--glow-gold);
   padding: var(--sp-7) var(--sp-6);
+}
+
+.bonus-panel::before {
+  content: '';
+  position: absolute;
+  inset: 7px;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--r-xl) - 4px);
+  pointer-events: none;
 }
 
 .bonus-marquee {
@@ -579,8 +644,36 @@
   opacity: 0.35;
 }
 
-.pavilion-emoji {
-  font-size: 44px;
+.pavilion-art {
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--ivory-grad);
+  border: 1px solid var(--line-gold);
+  box-shadow: inset 0 2px 6px rgba(95, 71, 15, 0.2);
+}
+
+.pavilion-art .symbol-art {
+  color: var(--gold-mid);
+}
+
+.pavilion-num {
+  position: absolute;
+  top: -11px;
+  left: -11px;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 12px;
+  color: #241a05;
+  background: var(--gold-grad);
+  border-radius: 50%;
+  box-shadow: var(--glow-gold);
 }
 
 .pavilion b {
@@ -609,7 +702,7 @@
   height: 28px;
   border-radius: 50%;
   background: var(--gold-grad);
-  color: #241500;
+  color: #241a05;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -638,7 +731,7 @@
   height: 84px;
   border-radius: 50%;
   background: var(--gold-grad);
-  color: #241500;
+  color: #241a05;
   display: flex;
   align-items: center;
   justify-content: center;

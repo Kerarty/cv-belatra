@@ -10,6 +10,7 @@ import { createInitialState, gameReducer, winningCells } from '../../game/reduce
 import { evaluateGrid, spinGrid } from '../../game/engine'
 import type { BonusConfig } from '../../game/types'
 import { ROLE_LABELS, SYMBOL_ORDER, SYMBOLS } from '../../data/symbols'
+import { SymbolArt } from './SymbolArt'
 
 const REEL_COUNT = 5
 
@@ -224,8 +225,8 @@ export function SlotLab({ config }: { config: BonusConfig }) {
             const s = SYMBOLS[id]
             return (
               <div key={id} className="legend-card">
-                <div className="legend-emoji" style={{ background: s.bg, color: s.color }}>
-                  {s.emoji}
+                <div className="legend-art">
+                  <SymbolArt id={id} size={44} />
                 </div>
                 <div className="legend-body">
                   <div className="legend-top">

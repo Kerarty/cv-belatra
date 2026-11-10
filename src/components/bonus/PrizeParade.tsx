@@ -3,6 +3,13 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Check, PartyPopper, Play, Ticket } from 'lucide-react'
 import { PAVILIONS } from '../../data/tuning'
 import type { BonusConfig, BonusState, PavilionType } from '../../game/types'
+import { PavilionArt } from '../slotlab/SymbolArt'
+
+const PAVILION_NUMERAL: Record<PavilionType, string> = {
+  multiplier: 'I',
+  spins: 'II',
+  wild: 'III',
+}
 
 interface PrizeParadeProps {
   mode: 'choose' | 'result'
@@ -31,8 +38,8 @@ export function PrizeParade({ mode, config, bonus, onPick, onCollect }: PrizePar
       aria-modal="true"
       aria-label={mode === 'choose' ? 'Выбор павильона Prize Parade' : 'Результат бонуса'}
     >
-      <div className="glow-orb" style={{ width: 380, height: 380, top: '10%', left: '12%', background: 'rgba(160,107,255,0.28)' }} />
-      <div className="glow-orb" style={{ width: 320, height: 320, bottom: '8%', right: '10%', background: 'rgba(240,195,78,0.2)' }} />
+      <div className="glow-orb" style={{ width: 380, height: 380, top: '10%', left: '12%', background: 'rgba(212,175,55,0.16)' }} />
+      <div className="glow-orb" style={{ width: 320, height: 320, bottom: '8%', right: '10%', background: 'rgba(143,107,29,0.18)' }} />
 
       <motion.div
         className="bonus-panel"
@@ -69,12 +76,13 @@ export function PrizeParade({ mode, config, bonus, onPick, onCollect }: PrizePar
                     disabled={false}
                     aria-pressed={isActive}
                   >
+                    <span className="pavilion-num">{PAVILION_NUMERAL[p.type]}</span>
                     <motion.span
-                      className="pavilion-emoji"
-                      animate={isActive ? { scale: [1, 1.3, 1.15], rotate: [0, -8, 6, 0] } : {}}
+                      className="pavilion-art"
+                      animate={isActive ? { scale: [1, 1.18, 1.08], rotate: [0, -4, 3, 0] } : {}}
                       transition={{ duration: 0.5 }}
                     >
-                      {p.emoji}
+                      <PavilionArt type={p.type} size={46} />
                     </motion.span>
                     <b style={{ color: p.color }}>{p.name}</b>
                     <p className="pavilion-desc">{p.desc}</p>
