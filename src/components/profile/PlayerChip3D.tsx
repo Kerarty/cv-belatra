@@ -141,7 +141,7 @@ export function PlayerChip3D() {
       // ---------- жетон ----------
       const pivot = new THREE.Group()
       const chip = new THREE.Group()
-      chip.rotation.x = 1.08 // наклон: лицевая грань к камере
+      chip.rotation.x = 0.98 // наклон: лицевая грань к камере
       pivot.add(chip)
       scene.add(pivot)
 
@@ -220,7 +220,7 @@ export function PlayerChip3D() {
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
       const tick = () => {
         // мягкое покачивание ±~28° вокруг драг-смещения
-        const sway = reduced || dragging ? 0 : Math.sin(performance.now() / 1600) * 0.5
+        const sway = reduced || dragging ? 0 : Math.sin(performance.now() / 2000) * 0.3
         pivot.rotation.y = dragOffsetY + sway
         renderer.render(scene, camera)
         raf = window.requestAnimationFrame(tick)
