@@ -4,75 +4,75 @@ import { profile } from '../../data/profile'
 import { MiniSlot } from './MiniSlot'
 
 const fadeUp = {
-  initial: { opacity: 0, y: 28 },
+  initial: { opacity: 0, y: 24 },
   animate: { opacity: 1, y: 0 },
 }
 
 export function Hero() {
   return (
     <section id="start" className="hero">
-      <div className="glow-orb" style={{ width: 420, height: 420, top: -80, right: '8%', background: 'rgba(160,107,255,0.25)' }} />
-      <div className="glow-orb" style={{ width: 360, height: 360, bottom: -60, left: '4%', background: 'rgba(240,195,78,0.16)' }} />
+      <div className="glow-orb" style={{ width: 480, height: 480, top: -120, left: '50%', transform: 'translateX(-50%)', background: 'rgba(212,175,55,0.14)' }} />
+      <div className="glow-orb" style={{ width: 340, height: 340, bottom: -40, right: '4%', background: 'rgba(143,107,29,0.12)' }} />
 
-      <div className="container hero-grid">
-        <div className="hero-copy">
-          <motion.span
-            className="section-kicker"
-            {...fadeUp}
-            transition={{ duration: 0.5 }}
-          >
-            Interactive Game Designer Portfolio
-          </motion.span>
+      {/* Угловые орнаменты ар-деко */}
+      <span className="hero-corner tl" aria-hidden="true" />
+      <span className="hero-corner tr" aria-hidden="true" />
+      <span className="hero-corner bl" aria-hidden="true" />
+      <span className="hero-corner br" aria-hidden="true" />
 
-          <motion.h1
-            className="hero-title"
-            {...fadeUp}
-            transition={{ duration: 0.6, delay: 0.08 }}
-          >
-            GAME DESIGN
-            <br />
-            <span className="hero-title-gold">STUDIO</span>
-          </motion.h1>
+      <div className="container hero-inner">
+        <motion.span className="section-kicker hero-kicker" {...fadeUp} transition={{ duration: 0.5 }}>
+          Interactive Game Designer Portfolio
+        </motion.span>
 
-          <motion.p className="hero-name" {...fadeUp} transition={{ duration: 0.6, delay: 0.16 }}>
-            {profile.name} · <span className="text-gold">{profile.role}</span>
-          </motion.p>
+        <motion.h1 className="hero-title" {...fadeUp} transition={{ duration: 0.6, delay: 0.08 }}>
+          GAME DESIGN <span className="hero-title-gold">STUDIO</span>
+        </motion.h1>
 
-          <motion.p className="hero-tagline" {...fadeUp} transition={{ duration: 0.6, delay: 0.22 }}>
-            {profile.tagline}
-          </motion.p>
+        <motion.p className="hero-name" {...fadeUp} transition={{ duration: 0.6, delay: 0.16 }}>
+          {profile.name} · <span className="text-gold">{profile.role}</span>
+        </motion.p>
 
-          <motion.div className="hero-actions" {...fadeUp} transition={{ duration: 0.6, delay: 0.3 }}>
-            <a href="#slot-lab" className="btn btn-gold btn-lg">
-              <Play size={18} />
-              Slot Lab — играть
-            </a>
-            <a href="#portfolio" className="btn btn-outline btn-lg">
-              <Briefcase size={18} />
-              Портфолио
-            </a>
-            <a href={profile.pdf} className="btn btn-ghost btn-lg" download>
-              <Download size={18} />
-              PDF-резюме
-            </a>
-          </motion.div>
+        <motion.div className="hero-row" {...fadeUp} transition={{ duration: 0.65, delay: 0.24 }}>
+          <div className="hero-slot">
+            <MiniSlot />
+          </div>
 
-          <motion.div className="hero-meta" {...fadeUp} transition={{ duration: 0.6, delay: 0.38 }}>
-            <span>{profile.location}</span>
-            <span className="dot">·</span>
-            <span>БГУИР 2023—2027</span>
-            <span className="dot">·</span>
-            <span>Слоты · Механики · Баланс</span>
-          </motion.div>
-        </div>
+          <div className="hero-copy">
+            <p className="hero-tagline">{profile.tagline}</p>
 
-        <motion.div
-          className="hero-slot"
-          initial={{ opacity: 0, scale: 0.92, rotate: -2 }}
-          animate={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <MiniSlot />
+            <div className="hero-actions">
+              <a href="#slot-lab" className="btn btn-gold btn-lg">
+                <Play size={18} />
+                Slot Lab — играть
+              </a>
+              <a href="#portfolio" className="btn btn-outline btn-lg">
+                <Briefcase size={18} />
+                Портфолио
+              </a>
+              <a href={profile.pdf} className="btn btn-ghost btn-lg" download>
+                <Download size={18} />
+                PDF-резюме
+              </a>
+            </div>
+
+            <div className="hero-stats">
+              {profile.stats.map((s) => (
+                <div key={s.label} className="stat">
+                  <b>{s.value}</b>
+                  <span>{s.label}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="hero-meta">
+              <span>{profile.location}</span>
+              <span className="dot">◆</span>
+              <span>БГУИР 2023—2027</span>
+              <span className="dot">◆</span>
+              <span>Слоты · Механики · Баланс</span>
+            </div>
+          </div>
         </motion.div>
       </div>
 

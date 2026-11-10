@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Dices, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 
 const LINKS = [
   { id: 'start', label: 'Старт' },
@@ -46,10 +46,11 @@ export function Navbar() {
     <header className={`nav ${scrolled ? 'nav-scrolled' : ''}`}>
       <div className="container nav-inner">
         <a href="#start" className="nav-logo" aria-label="Наверх">
-          <Dices size={20} className="nav-logo-icon" />
+          <span className="nav-logo-mark">◆</span>
           <span>
-            GDS<em>· Belatra</em>
+            G<em>·</em>D<em>·</em>S
           </span>
+          <span className="nav-logo-sub">Belatra</span>
         </a>
 
         <nav className="nav-links" aria-label="Разделы">

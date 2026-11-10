@@ -1,12 +1,17 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Dices } from 'lucide-react'
+import type { SymbolId } from '../../game/types'
+import { SymbolArt } from '../slotlab/SymbolArt'
 
-const POOL = ['🎪', '💎', '⭐', '🎈', '🎯', '🎭']
+const POOL: SymbolId[] = ['carnival', 'star', 'diamond', 'mask', 'target', 'carousel']
 
-/** Декоративная слот-машина главного экрана: 3 барабана + кнопка Spin */
+function randomSymbol(): SymbolId {
+  return POOL[Math.floor(Math.random() * POOL.length)]
+}
+
+/** Декоративный арочный автомат главного экрана: 3 барабана + кнопка SPIN */
 export function MiniSlot() {
-  const [reels, setReels] = useState(['⭐', '🎪', '💎'])
+  const [reels, setReels] = useState<SymbolId[]>(['star', 'carnival', 'diamond'])
   const [spinning, setSpinning] = useState(false)
   const [jackpot, setJackpot] = useState(false)
   const timers = useRef<number[]>([])
@@ -19,7 +24,7 @@ export function MiniSlot() {
     setJackpot(false)
 
     const tick = setInterval(() => {
-      setReels((prev) => prev.map(() => POOL[Math.floor(Math.random() * POOL.length)]))
+      setReels((prev) => prev.map(() => randomSymbol()))
     }, 80)
     timers.current.push(Number(tick))
 
@@ -28,7 +33,7 @@ export function MiniSlot() {
       const t = window.setTimeout(() => {
         setReels((prev) => {
           const next = [...prev]
-          next[i] = POOL[Math.floor(Math.random() * POOL.length)]
+          next[i] = randomSymbol()
           return next
         })
         if (i === 2) {
@@ -46,32 +51,28 @@ export function MiniSlot() {
 
   return (
     <div className="minislot" aria-label="Декоративная слот-машина">
-      <div className="minislot-top">
-        <span className="minislot-lamp" />
-        <span className="minislot-lamp" />
-        <span className="minislot-lamp" />
-      </div>
-      <div className="minislot-marquee">NEON CARNIVAL</div>
-      <div className={`minislot-reels ${spinning ? 'spinning' : ''}`}>
-        {reels.map((emoji, i) => (
-          <motion.div
-            key={i}
-            className="minislot-cell"
-            animate={spinning ? { y: [0, -6, 6, 0] } : { y: 0 }}
-            transition={{ repeat: spinning ? Infinity : 0, duration: 0.16 }}
-          >
-            {emoji}
-          </motion.div>
-        ))}
+      <div className="minislot-arch">
+        <div className="minislot-marquee">NEON CARNIVAL</div>
+        <div className={`minislot-reels ${spinning ? 'spinning' : ''}`}>
+          {reels.map((id, i) => (
+            <motion.div
+              key={i}
+              className="minislot-cell"
+              animate={spinning ? { y: [0, -5, 5, 0] } : { y: 0 }}
+              transition={{ repeat: spinning ? Infinity : 0, duration: 0.16 }}
+            >
+              <SymbolArt id={id} />
+            </motion.div>
+          ))}
+        </div>
       </div>
       <div className="minislot-msg" aria-live="polite">
         {jackpot ? <span className="jackpot">JACKPOT! ×3</span> : <span>Попробуй удачу</span>}
       </div>
       <button className="btn btn-gold btn-block" onClick={spin} disabled={spinning}>
-        <Dices size={18} />
         {spinning ? 'Крутится…' : 'SPIN'}
       </button>
-      <div className="minislot-credits">DEMO · без реальных ставок</div>
+      <div className="minislot-credits">DEMO · БЕЗ РЕАЛЬНЫХ СТАВОК</div>
     </div>
   )
 }

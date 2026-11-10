@@ -41,13 +41,13 @@
 
 .btn-gold {
   background: var(--gold-grad);
-  color: #241500;
+  color: #241a05;
   box-shadow: var(--glow-gold);
 }
 
 .btn-gold:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 6px 30px rgba(240, 195, 78, 0.45);
+  box-shadow: 0 6px 30px rgba(212, 175, 55, 0.45);
 }
 
 .btn-outline {
@@ -97,10 +97,12 @@
   display: inline-flex;
   align-items: center;
   padding: 3px 10px;
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 2px;
   color: var(--text-2);
   background: var(--surface);
 }
@@ -170,12 +172,14 @@
 .tab {
   flex-shrink: 0;
   padding: 8px 16px;
-  border-radius: 999px;
+  border-radius: 2px;
   border: 1px solid var(--line);
+  border-bottom-width: 2px;
   background: var(--surface);
   color: var(--text-2);
   font-size: 13px;
   font-weight: 700;
+  letter-spacing: 0.02em;
   cursor: pointer;
   transition: all var(--t-fast);
 }
@@ -187,8 +191,8 @@
 
 .tab.active {
   background: var(--gold-grad);
-  color: #241500;
-  border-color: transparent;
+  color: #241a05;
+  border-color: var(--gold-deep);
   box-shadow: var(--glow-gold);
 }
 
@@ -212,9 +216,11 @@
   max-height: calc(100vh - 64px);
   overflow-y: auto;
   background: var(--bg-2);
-  border: 1px solid var(--line-strong);
-  border-radius: var(--r-xl);
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--line-gold);
+  outline: 1px solid var(--line);
+  outline-offset: 5px;
+  border-radius: var(--r-lg);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.65);
 }
 
 .modal-head {
@@ -265,7 +271,7 @@
 }
 
 .switch-on {
-  background: rgba(53, 224, 200, 0.18);
+  background: rgba(212, 175, 55, 0.18);
   border-color: var(--turquoise);
 }
 

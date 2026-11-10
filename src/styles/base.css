@@ -1,5 +1,5 @@
 /* ============================================================
-   BASE — сброс, типографика, утилиты, секции
+   BASE — сброс, типографика, утилиты, секции (Art-Deco)
    ============================================================ */
 
 *,
@@ -22,9 +22,9 @@ body {
   color: var(--text-1);
   background-color: var(--bg-0);
   background-image:
-    radial-gradient(900px 500px at 85% -5%, rgba(91, 46, 158, 0.35), transparent 60%),
-    radial-gradient(700px 420px at -10% 25%, rgba(91, 46, 158, 0.22), transparent 60%),
-    radial-gradient(1000px 600px at 50% 115%, rgba(154, 111, 31, 0.14), transparent 60%);
+    radial-gradient(1100px 520px at 50% -8%, rgba(212, 175, 55, 0.13), transparent 62%),
+    radial-gradient(800px 460px at 90% 20%, rgba(143, 107, 29, 0.09), transparent 60%),
+    radial-gradient(900px 560px at 4% 85%, rgba(143, 107, 29, 0.08), transparent 62%);
   background-attachment: fixed;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -45,17 +45,17 @@ select {
 }
 
 a {
-  color: var(--violet-soft);
+  color: var(--gold-bright);
   text-decoration: none;
 }
 
 a:hover {
-  color: var(--gold-bright);
+  color: var(--ivory);
 }
 
 ::selection {
-  background: rgba(240, 195, 78, 0.35);
-  color: #fff;
+  background: rgba(212, 175, 55, 0.4);
+  color: #fff8e6;
 }
 
 ::-webkit-scrollbar {
@@ -69,12 +69,12 @@ a:hover {
 
 ::-webkit-scrollbar-thumb {
   background: var(--bg-3);
-  border-radius: 8px;
+  border-radius: 2px;
   border: 2px solid var(--bg-1);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--violet-deep);
+  background: var(--gold-deep);
 }
 
 h1,
@@ -103,30 +103,41 @@ h3 {
   margin-bottom: var(--sp-7);
 }
 
+/* Орнаментальный ар-деко разделитель под заголовком секции */
+.section-head::after {
+  content: '';
+  display: block;
+  height: 11px;
+  width: min(420px, 100%);
+  margin-top: 6px;
+  background:
+    radial-gradient(circle at center, var(--gold) 0 2.5px, transparent 3px) center / 11px 11px no-repeat,
+    linear-gradient(90deg, transparent 0, transparent 8%, var(--line-gold) 30%, var(--line-gold) 42%, transparent 43%, transparent 57%, var(--line-gold) 58%, var(--line-gold) 70%, transparent 92%, transparent 100%) center / 100% 1px no-repeat;
+  opacity: 0.9;
+}
+
 .section-kicker {
   display: inline-flex;
   align-items: center;
   gap: var(--sp-2);
   font-size: 12px;
   font-weight: 800;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--gold);
 }
 
 .section-kicker::before {
-  content: '';
-  width: 28px;
-  height: 1px;
-  background: var(--gold);
-  opacity: 0.7;
+  content: '◆';
+  font-size: 8px;
 }
 
 .section-title {
   font-family: var(--font-display);
   font-size: clamp(28px, 4vw, 44px);
   font-weight: 700;
-  background: linear-gradient(120deg, var(--text-1) 30%, var(--violet-soft) 70%, var(--gold-bright));
+  letter-spacing: 0.02em;
+  background: linear-gradient(120deg, var(--ivory) 25%, var(--gold-bright) 60%, var(--gold));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -143,7 +154,7 @@ h3 {
 }
 
 .text-teal {
-  color: var(--turquoise);
+  color: var(--gold-bright);
 }
 
 .sr-only {
@@ -204,10 +215,10 @@ h3 {
 @keyframes pulse-glow {
   0%,
   100% {
-    box-shadow: 0 0 12px rgba(240, 195, 78, 0.25);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.22);
   }
   50% {
-    box-shadow: 0 0 30px rgba(240, 195, 78, 0.55);
+    box-shadow: 0 0 26px rgba(212, 175, 55, 0.5);
   }
 }
 
