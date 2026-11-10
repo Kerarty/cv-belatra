@@ -57,14 +57,6 @@ export function PlayerChip3D() {
         ctx.beginPath()
         ctx.arc(size / 2, size / 2, size / 2 - 14, 0, TAU)
         ctx.stroke()
-        ctx.strokeStyle = '#f7f1df'
-        ctx.lineWidth = 30
-        for (let i = 0; i < 12; i++) {
-          const a = (i / 12) * TAU
-          ctx.beginPath()
-          ctx.arc(size / 2, size / 2, size / 2 - 14, a, a + (TAU / 12) * 0.6)
-          ctx.stroke()
-        }
         // тонкое кольцо
         ctx.strokeStyle = 'rgba(143, 107, 29, 0.55)'
         ctx.lineWidth = 3
@@ -74,6 +66,10 @@ export function PlayerChip3D() {
 
         ctx.textAlign = 'center'
         ctx.textBaseline = 'middle'
+        // крышки цилиндра зеркалят UV — компенсируем заранее
+        ctx.save()
+        ctx.translate(size, 0)
+        ctx.scale(-1, 1)
         if (kind === 'obverse') {
           ctx.fillStyle = '#5f470f'
           ctx.font = '400 168px Oranienbaum, Georgia, serif'
@@ -104,18 +100,8 @@ export function PlayerChip3D() {
           ctx.font = '700 30px Manrope, sans-serif'
           ctx.fillText('Д Е М О - С Т А В К А', size / 2, 398)
         }
+        ctx.restore()
 
-        // нижняя грань цилиндра зеркалится — рисуем заранее отражённым текстом
-        if (kind === 'reverse') {
-          const mirrored = document.createElement('canvas')
-          mirrored.width = size
-          mirrored.height = size
-          const mctx = mirrored.getContext('2d')!
-          mctx.translate(size, 0)
-          mctx.scale(-1, 1)
-          mctx.drawImage(c, 0, 0)
-          return track(new THREE.CanvasTexture(mirrored))
-        }
         return track(new THREE.CanvasTexture(c))
       }
 
